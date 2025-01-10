@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário Estilizado</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
             color: #333;
-            
         }
 
-        h1{
+        h1 {
             color: #222;
             margin: 2rem;
             text-align: center;
@@ -87,32 +85,31 @@
     </style>
 </head>
 <body>
-    <div id="liveAlertPlaceholder"></div>
-    <h1>Controle de tecido</h1>
-    <form action="index.html" method="post">
+    <h1>Controle de Tecido</h1>
+    <form id="tecidoForm" action="/salvar" method="post">
         <table>
             <thead>
                 <tr>
                     <th>Código:</th>
-                    <td colspan="2"><input type="number" name="" id=""></td>
+                    <td colspan="2">
+                        <input type="number" id="codigo" name="codigo" required>
+                    </td>
                     <td>
-                        <button type="button" class="btn btn-primary" data-bs-target="#exampleModal" data-bs-toggle="modal">new pç</button>
+                        <button type="button" id="btnTrazer">Trazer</button>
                     </td>
                 </tr>
                 <tr>
                     <th>Descrição:</th>
                     <td>
-                        <select name="" id="">
-                            <option value="">TRADICIONAL</option>
-                            <option value="">MODELO LONG</option>
-                            <option value="">BABY LOOK</option>
+                        <select name="descricao" id="descricao" required>
+                            <option value="TRADICIONAL">TRADICIONAL</option>
+                            <option value="MODELO_LONG">MODELO LONG</option>
+                            <option value="BABY_LOOK">BABY LOOK</option>
                         </select>
                     </td>
-                    <th>
-                        <label for="">Peso Tecido: </label>
-                    </th>
+                    <th>Peso Tecido:</th>
                     <td>
-                        <input type="number" name="" id="">
+                        <input type="number" name="pesoTecido" id="pesoTecido" required>
                     </td>
                 </tr>
             </thead>
@@ -120,28 +117,31 @@
                 <tr>
                     <th>Tecido:</th>
                     <td>
-                        <select name="" id="">
-                            <option value="">PP BRANCO</option>
-                            <option value="">DRY PREMIUM</option>
-                            <option value="">CACHAREL</option>
-                            <option value="">POLIAMIDA CAIO</option>
+                        <select name="tecido" id="tecido" required>
+                            <option value="PP_BRANCO">PP BRANCO</option>
+                            <option value="DRY_PREMIUM">DRY PREMIUM</option>
+                            <option value="CACHAREL">CACHAREL</option>
+                            <option value="POLIAMIDA_CAIO">POLIAMIDA CAIO</option>
                         </select>
                     </td>
                     <th>Metragem:</th>
-                    <td><input type="number" name="" id=""></td>
+                    <td>
+                        <input type="number" name="metragem" id="metragem" required>
+                    </td>
                 </tr>
                 <tr>
-                    <th>Tipo</th>
+                    <th>Tipo:</th>
                     <td>
-                        <select name="" id="">
-                            <option value="">MASCULINO</option>
-                            <option value="">FEMININO</option>
-                            <option value="">INFANTIL</option>
+                        <select name="tipo" id="tipo" required>
+                            <option value="MASCULINO">MASCULINO</option>
+                            <option value="FEMININO">FEMININO</option>
+                            <option value="INFANTIL">INFANTIL</option>
                         </select>
-                        
                     </td>
                     <th>Peso do Risco:</th>
-                    <td><input type="number" name="" id=""></td>
+                    <td>
+                        <input type="number" name="pesoRisco" id="pesoRisco" required>
+                    </td>
                 </tr>
                 <tr>
                     <th colspan="4">Tamanhos</th>
@@ -149,79 +149,59 @@
                 <tr>
                     <td>
                         <label for="t_pp">PP</label>
-                        <input type="number" name="tamanhos" id="t_pp">
+                        <input type="number" name="t_pp" id="t_pp">
                     </td>
                     <td>
                         <label for="t_p">P</label>
-                        <input type="number" name="tamanhos" id="t_p">
+                        <input type="number" name="t_p" id="t_p">
                     </td>
                     <td>
                         <label for="t_m">M</label>
-                        <input type="number" name="tamanhos" id="t_m">
+                        <input type="number" name="t_m" id="t_m">
                     </td>
-                    <td rowspan="2">Outros: <input type="text" name="" id="t_outros"></td>
+                    <td rowspan="2">
+                        Outros: <input type="text" name="t_outros" id="t_outros">
+                    </td>
                 </tr>
                 <tr>
                     <td>
                         <label for="t_g">G</label>
-                        <input type="number" name="tamanhos" id="t_g">
+                        <input type="number" name="t_g" id="t_g">
                     </td>
                     <td>
                         <label for="t_gg">GG</label>
-                        <input type="number" name="tamanhos" id="t_gg">
+                        <input type="number" name="t_gg" id="t_gg">
                     </td>
                     <td>
                         <label for="t_xgg">XGG</label>
-                        <input type="number" name="tamanhos" id="t_xgg">
+                        <input type="number" name="t_xgg" id="t_xgg">
                     </td>
                 </tr>
                 <tr>
-                    <th>Camadas</th>
-                    <td colspan="3"><input type="number" name="" id=""></td>
+                    <th>Camadas:</th>
+                    <td colspan="3">
+                        <input type="number" name="camadas" id="camadas">
+                    </td>
                 </tr>
                 <tr>
-                    <th>Quantidade Corte</th>
-                    <td colspan="3"><input type="number" name="" id=""></td>
+                    <th>Quantidade Corte:</th>
+                    <td colspan="3">
+                        <input type="number" name="quantidadeCorte" id="qtdCorte">
+                    </td>
                 </tr>
                 <tr>
                     <th>Concluído?</th>
-                    <td>
+                    <td colspan="3">
                         <label for="sim">Sim</label>
-                        <input type="radio" name="concluido" id="sim">
+                        <input type="radio" name="concluido" id="sim" value="sim">
                         <label for="nao">Não</label>
-                        <input type="radio" name="concluido" id="nao">
+                        <input type="radio" name="concluido" id="nao" value="nao">
                     </td>
                 </tr>
             </tbody>
         </table>
-        <button type="submit">Enviar</button>
+        <button type="submit" class="btn btn-success mt-3">Enviar</button>
     </form>
-        <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Nova peça</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-                <label for="">Códido</label>
-                <input type="text" name="" id="" class="mt-3 w-100">
-
-                <button type="button" class="mt-3 w-100" data-bs-dismiss="modal" id="liveAlertBtn">Adicionar</button>
-            
-
-            
-            </div>
-        </div>
-        </div>
-    </div>
-
-    
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
-  
 </body>
 </html>

@@ -1,0 +1,17 @@
+{
+  "name": "controle-tecido",
+  "version": "1.0.0",
+  "description": "este é um controle de tecido para a empresa saber quantas camisa podem ser feitas com uma unica peça de tecido",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "live-server --port 3000"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.2.1",
+    "express": "^4.21.2",
+    "prisma": "^6.2.1"
+  }
+}
