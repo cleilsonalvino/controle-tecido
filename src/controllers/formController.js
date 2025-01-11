@@ -35,29 +35,5 @@ const salvarDados = async (req, res) => {
     }
 };
 
-// Buscar dados pelo código
-const buscarDados = async (req, res) => {
-    try {
-        const { codigo } = req.params;
-
-        if (!codigo) {
-            return res.status(400).json({ message: 'Código é necessário.' });
-        }
-
-        const dados = await prisma.controle_tecido.findUnique({
-            where: { codigo: parseInt(codigo) }  // Convertendo para Int explicitamente
-        });
-
-        if (!dados) {
-            return res.status(404).json({ message: 'Dados não encontrados.' });
-        }
-
-        res.status(200).json(dados);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Erro ao buscar os dados.' });
-    }
-};
-
 
 module.exports = { salvarDados, buscarDados };
