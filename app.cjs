@@ -1,6 +1,7 @@
 const express = require('express');
 const { salvarDados, buscarDados } = require('./formController');
 const app = express();
+const path = require('path');
 
 // Middleware para JSON
 app.use(express.json());
@@ -19,8 +20,8 @@ app.get('/codigo/:codigo', buscarDados);
 
 // Rota padrão
 app.get('/', (req, res) => {
-    res.sendFile('index.html', { root: 'public' });
-  });
+  res.sendFile(path.join(__dirname, 'public', 'index.html')); // Garante o uso de caminho absoluto
+});
   
 
 // Inicia o servidor
