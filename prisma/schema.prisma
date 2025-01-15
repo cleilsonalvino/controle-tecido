@@ -7,18 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model controle_tecido {
-  id          Int      @id @default(autoincrement())
-  codigo      Int      @unique
-  descricao   String
-  pesoTecido  Float
-  tecido      String
-  metragem    Float
-  tipo        String
-  pesoRisco   Float
-  tamanhos    Json
-  camadas     Int
-  qtdCorte    Int
-  concluido   Boolean
-  criadoEm    DateTime @default(now())
+model controleTecido {
+  id         Int      @id @default(autoincrement())
+  codigo     Int      @unique
+  descricao  String
+  pesoTecido Float
+  tecido     String
+  metragem   Float
+  tipo       String
+  pesoRisco  Float
+  tamanhos   Json
+  camadas    Int
+  qtdCorte   Int
+  concluido  String
+  criadoEm   DateTime @default(now())
 }

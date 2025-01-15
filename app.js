@@ -15,7 +15,7 @@ app.use(express.static('public'));  // Este middleware vai servir arquivos da pa
 app.post('/salvar', salvarDados);
 
 // Rota para buscar os dados
-app.get('/:codigo', buscarDados);
+app.get('/codigo/:codigo', buscarDados);
 
 // Rota padrão
 app.get('/', (req, res) => {
