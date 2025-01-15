@@ -1,5 +1,5 @@
 const express = require('express');
-const { salvarDados, buscarDados } = require('./public/formController');
+const { salvarDados, buscarDados } = require('./formController');
 const app = express();
 
 // Middleware para JSON
