@@ -5,9 +5,7 @@
   "main": "script.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "live-server --port 3000",
-    "build": "node app.js"
+    "vercel-build": "prisma generate && npx prisma migrate deploy"
   },
   "author": "",
   "license": "ISC",
