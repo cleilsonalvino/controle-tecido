@@ -24,8 +24,11 @@ app.get('/', (req, res) => {
   
 
 // Inicia o servidor
-const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}\n http://localhost:3000/
-`);
-});
+// const PORT = 3000;
+// app.listen(PORT, () => {
+//     console.log(`Servidor rodando na porta ${PORT}\n http://localhost:3000/
+// `);
+// });
+
+
+module.exports = app;
