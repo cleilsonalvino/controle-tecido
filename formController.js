@@ -58,6 +58,8 @@ const buscarDados = async (req, res) => {
             }
         });
 
+        console.log(tecido.tamanhos)
+
         if (tecido) {
             return res.json(tecido);  // Retorna o tecido encontrado diretamente
         } else {
@@ -70,6 +72,17 @@ const buscarDados = async (req, res) => {
     }
 };
 
+
+// async function teste() {
+//     const tecido = await prisma.controleTecido.findMany({
+//         select: {
+//             tamanhos: true
+//         }
+//     })
+//     console.log(tecido)
+// }
+
+// teste()
 
 
 module.exports = { salvarDados, buscarDados };

@@ -247,6 +247,7 @@
 
         if (response.ok) {
             alert("Dados enviados com sucesso!");
+            document.querySelector('form').reset(); // Limpa o formulário
         } else {
             console.error("Erro ao enviar os dados");
             alert("Ocorreu um erro ao enviar os dados.");
@@ -283,12 +284,12 @@ document.getElementById('btnTrazer').addEventListener('click', async () => {
             document.getElementById('tipo').value = data.tipo || '';
             document.getElementById('pesoRisco').value = data.pesoRisco || '';
 
-            document.getElementById('t_pp').value = data.tamanhos.PP || '';
-            document.getElementById('t_p').value = data.tamanhos.P || '';
-            document.getElementById('t_m').value = data.tamanhos.M || '';
-            document.getElementById('t_g').value = data.tamanhos.G || '';
-            document.getElementById('t_gg').value = data.tamanhos.GG || '';
-            document.getElementById('t_xgg').value = data.tamanhos.XGG || '';
+            document.getElementById('t_pp').value = data.tamanhos.pp || '';
+            document.getElementById('t_p').value = data.tamanhos.p || '';
+            document.getElementById('t_m').value = data.tamanhos.p || '';
+            document.getElementById('t_g').value = data.tamanhos.g || '';
+            document.getElementById('t_gg').value = data.tamanhos.gg || '';
+            document.getElementById('t_xgg').value = data.tamanhos.xgg || '';
 
             document.getElementById('camadas').value = data.camadas || '';
             document.getElementById('qtdCorte').value = data.qtdCorte || '';
@@ -308,6 +309,8 @@ document.getElementById('btnTrazer').addEventListener('click', async () => {
                 checkboxNao.checked = false;
                 document.getElementById('statusSpan').textContent = '';
             }
+
+            
         } else {
             alert("Código não encontrado no banco de dados.");
         }

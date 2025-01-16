@@ -5,7 +5,8 @@
   "main": "script.js",
   "scripts": {
     "start": "node app.js",
-    "build": "prisma generate && npx prisma migrate deploy"
+    "build": "prisma generate && npx prisma migrate deploy",
+    "prisma:generate:prod": "prisma generate --no-engine"
   },
   "author": "",
   "license": "ISC",
