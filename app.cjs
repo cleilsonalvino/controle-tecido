@@ -1,9 +1,17 @@
 const express = require('express');
 const { salvarDados, buscarDados } = require('./formController');
 const app = express();
+const cors = require('cors');
 const path = require('path');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+
+// Middleware para CORS
+app.use(cors({
+  origin: 'https://controle-tecido.vercel.app',  // Permitir apenas essa origem específica
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Métodos permitidos
+  allowedHeaders: ['Content-Type', 'Authorization']  // Headers permitidos
+}));
 
 // Middleware para JSON
 app.use(express.json());
