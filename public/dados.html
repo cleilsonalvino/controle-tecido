@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle de Tecido</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card {
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <a href="/">inicio</a>
+  <div class="container my-4">
+    <h1 class="text-center">Controle de Tecido</h1>
+    <div class="row" id="card-container">
+      <!-- Os cartões serão preenchidos aqui -->
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="tecidoModal" tabindex="-1" aria-labelledby="tecidoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tecidoModalLabel">Detalhes do Tecido</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Peso de Risco</th>
+                <th>Camadas</th>
+                <th>Quantidade de Corte</th>
+                <th>Concluído</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="modal-table-body">
+              <!-- Detalhes do tecido serão preenchidos aqui -->
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const fetchTecidos = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/tecidos");
+        const tecidos = await response.json();
+
+        const cardContainer = document.getElementById("card-container");
+        cardContainer.innerHTML = ""; // Limpa os cartões antes de preencher
+
+        tecidos.forEach(tecido => {
+          // Criação de cada card
+          const card = document.createElement("div");
+          card.className = "col-md-4 mb-3";
+          card.innerHTML = `
+            <div class="card p-3">
+              <h5>Código: ${tecido.codigo}</h5>
+              <p><strong>Tecido:</strong> ${tecido.tecido}</p>
+            </div>
+          `;
+
+          // Adiciona evento para abrir o modal ao clicar no card
+          card.addEventListener("click", () => abrirModal(tecido));
+          cardContainer.appendChild(card);
+        });
+      } catch (error) {
+        console.error("Erro ao buscar os tecidos:", error);
+      }
+    };
+
+    const abrirModal = tecido => {
+      // Preenche os dados no modal
+      const modalTitle = document.getElementById("tecidoModalLabel");
+      const modalTableBody = document.getElementById("modal-table-body");
+
+      modalTitle.textContent = `Detalhes do Tecido - Código: ${tecido.codigo}`;
+      modalTableBody.innerHTML = `
+        <tr>
+          <td>${tecido.pesoRisco}</td>
+          <td>${tecido.camadas}</td>
+          <td>${tecido.qtdCorte}</td>
+          <td>${tecido.concluido}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" onclick="editarTecido(${tecido.codigo})">Editar</button>
+            <button class="btn btn-sm btn-danger" onclick="deletarTecido(${tecido.codigo})">Deletar</button>
+          </td>
+        </tr>
+      `;
+
+      // Abre o modal
+      const tecidoModal = new bootstrap.Modal(document.getElementById("tecidoModal"));
+      tecidoModal.show();
+    };
+
+    const editarTecido = async codigo => {
+      const novaDescricao = prompt("Digite a nova descrição do tecido:");
+      if (!novaDescricao) return;
+
+      try {
+        const response = await fetch(`/tecidos/${codigo}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ descricao: novaDescricao }),
+        });
+
+        if (response.ok) {
+          alert("Tecido atualizado com sucesso!");
+          fetchTecidos(); // Atualiza os cartões
+        } else {
+          alert("Erro ao atualizar o tecido.");
+        }
+      } catch (error) {
+        console.error("Erro ao atualizar o tecido:", error);
+      }
+    };
+
+    const deletarTecido = async codigo => {
+      if (!confirm("Tem certeza que deseja deletar este tecido?")) return;
+
+      try {
+        const response = await fetch(`/tecidos/${codigo}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          alert("Tecido deletado com sucesso!");
+          fetchTecidos(); // Atualiza os cartões
+        } else {
+          alert("Erro ao deletar o tecido.");
+        }
+      } catch (error) {
+        console.error("Erro ao deletar o tecido:", error);
+      }
+    };
+
+    // Chama a função ao carregar a página
+    fetchTecidos();
+  </script>
+</body>
+</html>
