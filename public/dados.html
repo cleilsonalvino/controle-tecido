@@ -63,7 +63,7 @@
   <script>
     const fetchTecidos = async () => {
       try {
-        const response = await fetch("http://localhost:3000/tecidos");
+        const response = await fetch("/tecidos");
         const tecidos = await response.json();
 
         const cardContainer = document.getElementById("card-container");
